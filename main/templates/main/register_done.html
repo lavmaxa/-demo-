@@ -1,0 +1,21 @@
+{% extends 'main/layout.html' %}
+         {% block usernmenu %}
+                {% if type_user == 'Студент' %}
+                    <li><a href="{% url 'rating'%}">Зачетная книжка</a></li>
+                {% endif %}
+                {% if type_user == 'Преподаватель' %}
+                    <li><a href="{% url 'rating_for_teacher'%}">Ведомость</a></li>
+                {% endif %}
+                {% if type_user == 'Сотрудник деканата' %}
+                    <li><a href="{% url 'vedomost'%}">Создание ведомость</a></li>
+                    <li><a href="{% url 'all_student_group'%}">Просмотр ведомостей</a></li>
+                {% endif %}
+            {% endblock usernmenu %}
+{% block content %}
+    <h1> УРА, ВЫ ЗАРЕГИСТРИРОВАЛИСЬ</h1>
+{% endblock %}
+
+{% block title %}
+    <h1> Зачетная книжуня</h1>
+{% endblock %}
+

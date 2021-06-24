@@ -1,0 +1,37 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}{{ title }} {% endblock %}
+         {% block usernmenu %}
+                {% if type_user == 'Студент' %}
+                    <li><a href="{% url 'rating'%}">Зачетная книжка</a></li>
+                {% endif %}
+                {% if type_user == 'Преподаватель' %}
+                    <li><a href="{% url 'rating_for_teacher'%}">Ведомость</a></li>
+                {% endif %}
+                {% if type_user == 'Сотрудник деканата' %}
+                    <li><a href="{% url 'vedomost'%}">Создание ведомость</a></li>
+                    <li><a href="{% url 'all_student_group'%}">Просмотр ведомостей</a></li>
+                {% endif %}
+            {% endblock usernmenu %}
+{% block content %}
+{% if user.is_authenticated %}
+
+    {% if user %}
+<!--Если у пользователя есть Имя или Фамилия , то <div class="user"> Здравствуй, {{ user.get_full_name }}!-->
+         <div class="user"> Здравствуй, {{ user}}!
+<!--             <form action="logout" method="post">-->
+<!--                 {% csrf_token %}-->
+<!--                   <a href="{% url 'logout' %}"><button class="btn btn-danger"><i class="fas fa-plus-circle"></i>Выйти</button></a>-->
+<!--             </form>-->
+        </div>
+    {% endif %}
+
+{% else %}
+   {% if form.errors %}
+         <p class="error">Сожалеем, вы неправильно ввели логин или пароль</p>
+   {% endif %}
+
+{%  endif %}
+{% endblock %}
+
+

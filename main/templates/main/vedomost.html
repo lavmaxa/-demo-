@@ -1,0 +1,77 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Ведомость {% endblock %}
+
+{% block script %}
+    <script>
+         $(document).ready(function()
+         {
+            $("#id_disciplines").select2({
+            });
+            $("#id_teacher").select2({
+            });
+            $("#id_group").select2({
+            });
+         });
+    </script>
+{% endblock %}
+         {% block usernmenu %}
+                {% if type_user == 'Студент' %}
+                    <li><a href="{% url 'rating'%}">Зачетная книжка</a></li>
+                {% endif %}
+                {% if type_user == 'Преподаватель' %}
+                    <li><a href="{% url 'rating_for_teacher'%}">Ведомость</a></li>
+                {% endif %}
+                {% if type_user == 'Сотрудник деканата' %}
+                    <li><a href="{% url 'vedomost'%}">Создание ведомость</a></li>
+                    <li><a href="{% url 'all_student_group'%}">Просмотр ведомостей</a></li>
+                {% endif %}
+            {% endblock usernmenu %}
+{% block content %}
+
+       <div class="features">
+           <div class="ved">
+                <h1>Форма по добавлению ведомости</h1>
+             </div>
+        <form method="post" >
+            <div class="createved">
+                {% csrf_token %}
+                {{formFa}}
+                {{ form.id }}
+                <br>
+                Введите семестр:
+                {{ form.semester  }}
+                <br>
+                Введите или выберите дату котнроля:
+                {{ form.date }}
+                <br>
+
+                Выберите форму контроля:
+                <br>
+                <div class="form_radio" >
+                    {{ form.control }}
+                </div>
+                <br>
+                Выберите дисциплину:
+                {{ form.disciplines }}
+                <br>
+                Выберите группу:
+
+                {{ form.group }}
+                <br>
+                Выберите преподавателя:
+                 <br>
+                {{ form.teacher }}
+                <br>
+
+
+                <span>{{ error }}</span> <br>
+                <button class="btn btn-success" type="submit">Добавить ведомость</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+
+
+

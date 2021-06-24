@@ -1,0 +1,44 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+ Контакты
+{% endblock %}
+         {% block usernmenu %}
+                {% if type_user == 'Студент' %}
+                    <li><a href="{% url 'rating'%}">Зачетная книжка</a></li>
+                {% endif %}
+                {% if type_user == 'Преподаватель' %}
+                    <li><a href="{% url 'rating_for_teacher'%}">Ведомость</a></li>
+                {% endif %}
+                {% if type_user == 'Сотрудник деканата' %}
+                    <li><a href="{% url 'vedomost'%}">Создание ведомость</a></li>
+                    <li><a href="{% url 'all_student_group'%}">Просмотр ведомостей</a></li>
+                {% endif %}
+            {% endblock usernmenu %}
+{% block content %}
+
+<div class="four"><h1>Контакты</h1></div>
+
+
+<ul class="push">
+  <li><a href="https://isu.ru/ru/contacts/phones/main/">Телефонный справочник</a></li>
+  <li><a href="https://isu.ru/ru/university/structure/administration/accounting/rekvizits/">Реквизиты ИГУ и образцы договоров</a></li>
+  <li><a href="https://isu.ru/ru/university/campus/main/">Кампус</a></li>
+</ul>
+
+    <p><strong>Официальное наименование вуза:</strong>  Федеральное государственное бюджетное образовательное учреждение высшего образования «Иркутский государственный университет»</p>
+    <p><strong> Сокращенное наименование вуза:</strong>  ИГУ</p>
+
+
+    <p><strong>Почтовый адрес:</strong> 664003 г. Иркутск, ул. Карла Маркса, 1</p>
+
+    <p><strong>Приемная ректора:</strong> (3952) 521-900, <a href="rector@isu.ru"></a> </p>
+
+    <p><strong>Отдел делопроизводства и контроля:</strong> (3952) 521-931, факс: (3952) 24-22-38,<u><a href="office@admin.isu.ru">office@admin.isu.ru</a></u> </p>
+
+    <p><strong>Центральная приемная комиссия:</strong> (3952) 521-555, (3952) 521-777, <u><a href="zpk@isu.ru">zpk@isu.ru</a> ,<a href="priem@isu.ru">priem@isu.ru</a> </u></p>
+
+    <p><strong>Управление информационной политики:</strong> (3952) 521-971, <u><a href="isupress@isu.ru">isupress@isu.ru</a></u></p>
+
+    <p><strong>Дежурно-диспетчерская служба:</strong> (3952) 24-24-10, (3952) 521-516</p>
+{% endblock %}

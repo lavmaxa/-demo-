@@ -1,0 +1,61 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Ведомомсть для заполнения оценок {% endblock %}
+{% block script %}
+    <script>
+         $(document).ready(function()
+         {
+            $("#id_name").select2({
+            });
+
+         });
+    </script>
+
+{% endblock %}
+         {% block usernmenu %}
+                {% if type_user == 'Студент' %}
+                    <li><a href="{% url 'rating'%}">Зачетная книжка</a></li>
+                {% endif %}
+                {% if type_user == 'Преподаватель' %}
+                    <li><a href="{% url 'rating_for_teacher'%}">Ведомость</a></li>
+                {% endif %}
+                {% if type_user == 'Сотрудник деканата' %}
+                    <li><a href="{% url 'vedomost'%}">Создание ведомость</a></li>
+                    <li><a href="{% url 'all_student_group'%}">Просмотр ведомостей</a></li>
+                {% endif %}
+            {% endblock usernmenu %}
+{% block content %}
+
+    <div class="features">
+
+        <form method="get">
+            {% csrf_token %}
+            {{formGroup.name }}
+            <br><br>
+            <button class="btn btn-success" type="submit">Выбрать </button>
+             <br><br>
+            <div class="teachved">
+            <table border="2" id="#t01">
+                <tr>
+                    <th>№ </th>
+                <th>ФИО студента</th>
+                   <th>Оценка</th>
+
+                </tr>
+                {% for ocenka in stud_group %}
+                <tr>
+                    <td></td>
+                    <td>{{ocenka.student.last_name}} {{ocenka.student.first_name}} {{ocenka.student.second_name}}</td>
+                    <td>{{ocenka.mark}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            </div>
+        </form>
+
+    </div>
+
+
+{% endblock %}
+
+
