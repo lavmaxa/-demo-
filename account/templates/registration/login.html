@@ -1,0 +1,79 @@
+{% load static %}
+<!dostype html>
+<html lang="ru">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+    content="width=device-width,user-scable=no,initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0" >
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} {% endblock %} </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'account/css/auth.css'%}" >
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+</head>
+<script>const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
+
+signUpButton.addEventListener('click', () => {
+	container.classList.add("right-panel-active");
+});
+
+signInButton.addEventListener('click', () => {
+	container.classList.remove("right-panel-active");
+});
+</script>
+<body>
+  <main>
+ {% block content %}
+
+<div class="container" id="container">
+	<div class="form-container sign-in-container">{% if form.errors %}
+  <p>Ваше имя пользователя и пароль не совпадают. Пожалуйста, попробуйте еще раз.</p>
+{% endif %}
+
+{% if next %}
+  {% if user.is_authenticated %}
+    <p>Ваша учетная запись не имеет доступа к этой странице. .</p>
+
+  {% endif %}
+{% endif %}
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+
+		<form action="#">
+			<h2>Войдите </h2>
+			 {{ form.username }}
+ 			 {{ form.password }}
+<!--			<p><a href="{% url 'password_reset' %}">Lost password?</a></p>-->
+
+			<input type="submit" value="Войти" />
+<input type="hidden" name="next" value="{{ next }}" />
+		</form>
+	</div>
+
+
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost" id="signIn">Войдите в систему</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h2>Welcome!</h2>
+				<p>Все результаты, полученные студентом в процессе обучения, отражены в электронной зачетной книжке.</p>
+					<p>Персональный логин и пароль для входа присваивается каждому студенту при поступлении.</p>
+					<p>Для удаленного просмотра успеваемости студента во время обучения войдите в систему. </p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock %}
+  </main>
+
+</body>
