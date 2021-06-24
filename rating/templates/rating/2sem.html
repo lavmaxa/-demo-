@@ -1,0 +1,81 @@
+{% extends "rating/rating.html"%}
+{% block title %}2 семестр{% endblock %}
+   {% block usernmenu %}
+                {% if type_user == 'Студент' %}
+                    <li><a href="{% url 'rating'%}">Зачетная книжка</a></li>
+                {% endif %}
+                {% if type_user == 'Преподаватель' %}
+                    <li><a href="{% url 'rating_for_teacher'%}">Ведомость</a></li>
+                {% endif %}
+                {% if type_user == 'Сотрудник деканата' %}
+                    <li><a href="{% url 'vedomost'%}">Создание ведомость</a></li>
+                    <li><a href="{% url 'all_student_group'%}">Просмотр ведомостей</a></li>
+                {% endif %}
+            {% endblock usernmenu %}
+{% block content %}
+
+<h1>Результаты промежуточной аттестации (экзамены)</h1>
+
+<div class="rating">
+    <table border="2" id="#t01">
+<tr>
+    <th>№ </th>
+<th>Наименование дисциплины (модуля),раздела </th>
+<th>Оценка</th>
+   <th>Дата сдачи экзамена</th>
+    <th>ФИО преподавателя</th>
+</tr>
+
+{% for ocenka in get_mark %}
+ {% if ocenka.statement.semester == 2 %}
+ {% if ocenka.statement.control == 'Экзамен' %}
+        <td></td>
+    <td>{{ocenka.statement.disciplines }} </td>
+    <td>{{ocenka.mark}}</td>
+    <td>{{ocenka.statement.date}}</td>
+    <td>{{ocenka.statement.teacher}}</td>
+</tr>
+{% endif %}
+{% endif %}
+{% endfor %}
+
+</table>
+</div>
+
+<h1>Результаты промежуточной аттестации (зачеты)</h1>
+
+<div class="rating">
+    <table border="2" id="#t01">
+<tr>
+    <th>№ </th>
+<th>Наименование дисциплины (модуля),раздела </th>
+<th>Оценка</th>
+   <th>Дата сдачи зачёта</th>
+    <th>ФИО преподавателя</th>
+</tr>
+        {% for a in mark %}
+{% if  user.email == a.student.email %}
+{% if a.statement.semester == 2 %}
+{% if a.statement.control == 'Зачёт' %}
+<tr>
+    <td></td>
+    <td>{{a.statement.disciplines }} </td>
+    <td>{{a.mark}}</td>
+    <td>{{a.statement.date}}</td>
+    <td>{{a.statement.teacher}}</td>
+
+</tr>
+
+{% endif %}
+{% endif %}
+{% endif %}
+
+{% endfor %}
+
+</table>
+</div>
+
+
+{% endblock %}
+
+

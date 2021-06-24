@@ -1,0 +1,51 @@
+{% extends 'main/layout.html' %}
+{% block title %}Оценочки {% endblock %}
+   {% block usernmenu %}
+                {% if type_user == 'Студент' %}
+                    <li><a href="{% url 'rating'%}">Зачетная книжка</a></li>
+                {% endif %}
+                {% if type_user == 'Преподаватель' %}
+                    <li><a href="{% url 'rating_for_teacher'%}">Ведомость</a></li>
+                {% endif %}
+                {% if type_user == 'Сотрудник деканата' %}
+                    <li><a href="{% url 'vedomost'%}">Создание ведомость</a></li>
+                    <li><a href="{% url 'all_student_group'%}">Просмотр ведомостей</a></li>
+                {% endif %}
+            {% endblock usernmenu %}
+{% block content %}
+<div class="user">
+
+<h1>
+  Зачетная книжка № <u>{{use.number_zachetka}}</u>
+</h1>
+
+ <h1>
+{{use.last_name}} {{use.first_name}} {{use.second_name}}</u>
+</h1>
+
+ <h1>
+    {{use.group.field_of_study}}
+</h1>
+
+
+<p>Обратите внимание на нумерацию семестров, например, осенний семестр 2-го курса является 3-им, весенний - 4-ым и т.д.</p>
+
+  <h5> Выберите нужный семестр</h5>
+<ul class="list3a">
+
+  <li><a href="1sem">1 семестр</a></li>
+  <li><a href="2sem">2 семестр</a></li>
+  <li><a href="3sem">3 семестр</a></li>
+  <li><a href="4sem">4 семестр</a></li>
+  <li><a href="5sem">5 семестр</a></li>
+  <li><a href="6sem">6 семестр</a></li>
+  <li><a href="7sem">7 семестр</a></li>
+  <li><a href="8sem">8 семестр</a></li>
+  <li><a href="all">Все семестры</a></li>
+</ul>
+
+
+</div>
+
+{% endblock %}
+

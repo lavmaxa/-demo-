@@ -1,0 +1,75 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Ведомомсть для заполнения оценок {% endblock %}
+{% block script %}
+    <script>
+         $(document).ready(function()
+         {
+            $("#id_name").select2({
+            });
+
+         });
+    </script>
+
+{% endblock %}
+   {% block usernmenu %}
+                {% if type_user == 'Студент' %}
+                    <li><a href="{% url 'rating'%}">Зачетная книжка</a></li>
+                {% endif %}
+                {% if type_user == 'Преподаватель' %}
+                    <li><a href="{% url 'rating_for_teacher'%}">Ведомость</a></li>
+                {% endif %}
+                {% if type_user == 'Сотрудник деканата' %}
+                    <li><a href="{% url 'vedomost'%}">Создание ведомость</a></li>
+                    <li><a href="{% url 'all_student_group'%}">Просмотр ведомостей</a></li>
+                {% endif %}
+            {% endblock usernmenu %}
+{% block content %}
+
+    <div class="features">
+        <div class="ved">
+            <h1>Заполнение ведомости</h1>
+        </div>
+        <form method="get">
+            {% csrf_token %}
+            <div class="vedform">
+             {{formFa.name }}
+                <br><br>
+                <button class="btn btn-success" type="submit">Выбрать </button>
+            </div>
+        </form>
+         <div class="ved">
+            <h2>{{ ved }}</h2>
+        </div>
+         <form method="post" >
+             <div class="teachved">
+                <table border="5">
+                     <tr>
+                         <th>№</th>
+                         <th>ФИО студента</th>
+                         <th>Оценка</th>
+                     </tr>
+                    {% csrf_token %}
+                    {{formset.management_form}}
+
+                    {% for form in formset %}
+                         {{ form.id }}
+                        {{ form.statement }}
+                        <tr>
+                            <td></td>
+                            <td> <div class="stu">{{ form.student }}</div></td>
+                            <td> {{ form.mark }}</td>
+                        </tr>
+
+                    {% endfor %}
+                </table>
+
+                <span>{{ error }}</span> <br>
+                <button class="btn btn-success" type="submit">Добавить ведомость</button>
+             </div>
+        </form>
+
+    </div>
+
+
+{% endblock %}

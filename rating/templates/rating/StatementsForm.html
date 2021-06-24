@@ -1,0 +1,75 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Оценочки {% endblock %}
+   {% block usernmenu %}
+                {% if type_user == 'Студент' %}
+                    <li><a href="{% url 'rating'%}">Зачетная книжка</a></li>
+                {% endif %}
+                {% if type_user == 'Преподаватель' %}
+                    <li><a href="{% url 'rating_for_teacher'%}">Ведомость</a></li>
+                {% endif %}
+                {% if type_user == 'Сотрудник деканата' %}
+                    <li><a href="{% url 'vedomost'%}">Создание ведомость</a></li>
+                    <li><a href="{% url 'all_student_group'%}">Просмотр ведомостей</a></li>
+                {% endif %}
+            {% endblock usernmenu %}
+{% block content %}
+
+    <div class="features">
+        <h1>Форма по добавлению ведомости</h1>
+        <form method="post">
+            {% csrf_token %} <br>
+            {{ form.id }} <br>
+            {{ form.semester  }} <br>
+            {{ form.date }} <br>
+            Форма контроля:
+            <input type="text" class="form-control" initial="Экзамен">  <br>
+            Дисциплина:
+            {{ form.disciplines }} <br>
+            Группа:
+            {{ form.group }} <br>
+            {{ form.teacher  }} <br>
+
+            {% for stu in student %}
+                {% for po in polzov %}
+                    {% if  po.email == stu.email %}
+                      {#  form.teacher={% po.user %} #}
+<!--                        <input type="text" class="form-control" placeholder="Дата контрол">-->
+
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+
+            <span>{{ error }}</span> <br>
+            <button class="btn btn-success" type="submit">Добавить ведомость</button>
+        </form>
+    </div>
+
+
+<!--СТУДЕНТ-->
+<!--    <div class="features">-->
+<!--       <h1>{{ title }} </h1>-->
+
+<!--            {% for ocenka in mark %}-->
+<!--                  {#  {% for po in polzov %} #}-->
+<!--                    {% if ocenka.student.first_name == 'Павел'%}-->
+<!--                   {#   {% if  po.email == ocenka.student.email %}#}-->
+<!--                    {{ ocenka.statement.semester }} Семестр-->
+<!--                        <table border="10">-->
+<!--                           <tr>-->
+<!--                               <th>Дисциплина  </th>-->
+<!--                                <th>ФИО студента</th>-->
+<!--                                <th>Номер зачетки</th>-->
+<!--                                <th>Оценка</th>-->
+<!--                           </tr>-->
+<!--                           <tr><td>{{ocenka.statement.disciplines }}     </td><td>{{ocenka.student.last_name}} {{ocenka.student.first_name}} {{ocenka.student.second_name}} </td><td>{{ ocenka.student.number_zachetka }}</td><td>{{ocenka.mark}}</td></tr>-->
+<!--                      </table>-->
+<!--                   {% endif %}-->
+<!--              {#   {% endfor %} #}-->
+
+<!--        {% endfor %}-->
+
+<!--    </div>-->
+{% endblock %}
+
+
