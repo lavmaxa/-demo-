@@ -1,0 +1,150 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+<!dostype html>
+<html lang="ru">
+<head>
+    <title>{% block title %}Расписание{% endblock %} </title>
+    </head>
+   {% block usernmenu %}
+                {% if type_user == 'Студент' %}
+                    <li><a href="{% url 'rating'%}">Зачетная книжка</a></li>
+                {% endif %}
+                {% if type_user == 'Преподаватель' %}
+                    <li><a href="{% url 'rating_for_teacher'%}">Ведомость</a></li>
+                {% endif %}
+                {% if type_user == 'Сотрудник деканата' %}
+                    <li><a href="{% url 'vedomost'%}">Создание ведомость</a></li>
+                    <li><a href="{% url 'all_student_group'%}">Просмотр ведомостей</a></li>
+                {% endif %}
+            {% endblock usernmenu %}
+<main>
+    {% block content %}
+
+ <header>
+  <a href="" class="logoRasp">Институты</a>
+  <nav>
+      <ul class="topmenu">
+        <li><a href="" class="submenu-link">Байкальская международная бизнес-школа (институт)  </a>
+           <ul class="submenu">
+           {% for b in data8 %}
+             <a href="{{ b.book.url }}" download="{{ b.book.url }}"><li>{{ b.title }}</li></a>
+          {% endfor %}
+                    </ul>
+
+          <li><a href="" class="submenu-link">Институт математики и информационных технологий</a>
+              <ul class="submenu">
+           {% for b in data %}
+             <a href="{{ b.book.url }}" download="{{ b.book.url }}"><li>{{ b.title }}</li></a>
+          {% endfor %}
+                    </ul>
+
+          <li><a href="" class="submenu-link">Институт социальных наук</a>
+           <ul class="submenu">
+           {% for b in data7 %}
+             <a href="{{ b.book.url }}" download="{{ b.book.url }}"><li>{{ b.title }}</li></a>
+          {% endfor %}
+                    </ul>
+
+          <li><a href="" class="submenu-link">Институт филологии, иностранных языков и медиакоммуникации</a>
+           <ul class="submenu">
+           {% for b in data6 %}
+             <a href="{{ b.book.url }}" download="{{ b.book.url }}"><li>{{ b.title }}</li></a>
+          {% endfor %}
+                    </ul>
+
+          <li><a href="" class="submenu-link">Международный институт экономики и лингвистики</a>
+           <ul class="submenu">
+           {% for b in data5 %}
+             <a href="{{ b.book.url }}" download="{{ b.book.url }}"><li>{{ b.title }}</li></a>
+          {% endfor %}
+                    </ul>
+
+          <li><a href="" class="submenu-link">Педагогический институт</a>
+           <ul class="submenu">
+           {% for b in data4 %}
+             <a href="{{ b.book.url }}" download="{{ b.book.url }}"><li>{{ b.title }}</li></a>
+          {% endfor %}
+                    </ul>
+
+          <li><a href="" class="submenu-link">Юридический институт</a>
+           <ul class="submenu">
+           {% for b in data3 %}
+             <a href="{{ b.book.url }}" download="{{ b.book.url }}"><li>{{ b.title }}</li></a>
+          {% endfor %}
+                    </ul>
+      </ul>
+    </nav>
+</header>
+
+ <header>
+  <a href="" class="logoRasp">Факультеты</a>
+  <nav>
+      <ul class="topmenu">
+        <li><a href="" class="submenu-link">Биолого-почвенный факультет </a>
+           <ul class="submenu">
+           {% for b in data9 %}
+             <a href="{{ b.book.url }}" download="{{ b.book.url }}"><li>{{ b.title }}</li></a>
+          {% endfor %}
+                    </ul>
+
+          <li><a href="" class="submenu-link">Географический факультет</a>
+           <ul class="submenu">
+           {% for b in data10 %}
+             <a href="{{ b.book.url }}" download="{{ b.book.url }}"><li>{{ b.title }}</li></a>
+          {% endfor %}
+                    </ul>
+
+          <li><a href="" class="submenu-link">Геологический факультет</a>
+           <ul class="submenu">
+           {% for b in data13 %}
+             <a href="{{ b.book.url }}" download="{{ b.book.url }}"><li>{{ b.title }}</li></a>
+          {% endfor %}
+                    </ul>
+
+          <li><a href="" class="submenu-link">Исторический факультет</a>
+           <ul class="submenu">
+           {% for b in data11 %}
+             <a href="{{ b.book.url }}" download="{{ b.book.url }}"><li>{{ b.title }}</li></a>
+          {% endfor %}
+                    </ul>
+
+          <li><a href="" class="submenu-link">Сибирско-американский факультет менеджмента</a>
+           <ul class="submenu">
+           {% for b in data12 %}
+             <a href="{{ b.book.url }}" download="{{ b.book.url }}"><li>{{ b.title }}</li></a>
+          {% endfor %}
+                    </ul>
+
+          <li><a href="" class="submenu-link">Факультет психологии</a>
+           <ul class="submenu">
+           {% for b in data14 %}
+             <a href="{{ b.book.url }}" download="{{ b.book.url }}"><li>{{ b.title }}</li></a>
+          {% endfor %}
+                    </ul>
+
+          <li><a href="" class="submenu-link">Физический факультет</a>
+           <ul class="submenu">
+           {% for b in data2 %}
+             <a href="{{ b.book.url }}" download="{{ b.book.url }}"><li>{{ b.title }}</li></a>
+          {% endfor %}
+                    </ul>
+          <li><a href="" class="submenu-link">Химический факультет</a>
+           <ul class="submenu">
+           {% for b in data15 %}
+             <a href="{{ b.book.url }}" download="{{ b.book.url }}"><li>{{ b.title }}</li></a>
+          {% endfor %}
+                    </ul>
+
+        </li>
+      </ul>
+    </nav>
+</header>
+
+{% endblock %}
+
+</main>
+<body >
+
+</body>
+</html>
+
